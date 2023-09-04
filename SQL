@@ -1,0 +1,160 @@
+Базы данных
+Типы данных
+INT целые числа whole numbers
+DEC десятичные decimal numbers
+BLOB/TEXT/MEMO большой объем текстовой информации
+CHAR/VARCHAR - строки, текст
+VARCHAR - string of text of length 1
+BLOB - binary large objects
+DATE/TIME/YEAR - формат даты
+FLOAT, DOUBLE данные с плавающей точкой
+TIMESTAMP - точка отсчета часовых поясов
+BOOLEAN - правда/ложь
+NULL -пустые значения
+
+Create database назва;- створити базу даних
+Drop database назва; - видалити базу даних
+Drop table назва - видалити таблицю
+Use назва; - Щоб перейти в потрібну базу даних 
+Show databases - показує таблиці які є
+Show tables -показує таблиці які є в базі даних
+Create table назва - створити таблицю
+Новий рядок скобки( назва колонок і тип який буде застосовуватись до полів)
+(id INT(11 - максимальна кількість) not null primary key)
+Скобки в кінці закрити
+DESC назва таблиці - подивитися в яких полях які дані використовуються
+INSERT INTO назва таблиці VAlUES - записуємо дані в таблицю. Буквенні дані в лапках.
+Select * from назва таблиці; - покаже таблицю
+DELETE from назва таблиці - удалить всю таблицю
+DELETE from назва таблиці where faculty =”red” - видалить тільки рядок
+UPDATE courses SET faculty = “red” where faculty=”med’; - замінити значення в рядку
+ALTER table назва таблиці DROP column назва колонки/столбика;- видалити колонку
+ALTER table courses ADD column id INT after number; - добавити колонку
+ insert into student(student_id, name) values(7, 'Ihor');
+unique - при створенні таблиці можна вказувати щоб не повторювалися
+not null - щоб не було нульового значения
+auto_increment - автоматично вписує 
+default 'undecided'
+Виведення значень без дублікатів - Select DISTINCT (назва поля) from назва таблиці
+Виведення всіх значень - Select * from таблиця
+Виведення певних значень - Select * from  назва таблиці LIMIT число рядків;
+Псевдоніми (temp) - select поле as поле from таблиця;
+Порівняння - select поле from таблиця Where поле = значення;
+ select * from таблиця  where not значення = "значення";
+Логічні операції - select поле from таблиця Where поле = значення AND поле = значення;
+Wildcard
+select поле from таблиця Where поле = значення OR поле = значення;
+Пошук схожих значень - select поле from таблиця Where поле LIKE ‘%on’;
+select поле from таблиця Where поле LIKE ‘%on_’;
+_ - одна літера
+%- не важливо скільки літер
+
+Join 
+inner join
+ select*
+    -> from employee
+    -> join branch
+    -> on employee.emp_id = branch.mgr_id;
+
+Left join
+сортування по таблиці з FROM
+
+Right join
+
+UNION 
+обєднує колонки з одної і іншої таблиці в одній колонці. 
+Повинно бути однакова кількість колонок для поєднання з одної і іншої таблиці.
+Повинен бути однаковий тип даних в колонках.
+ select first_name
+    -> from employee
+    -> UNION
+    -> select branch_name
+    -> from branch;
+Діапазон - select поле from таблиця Where поле between 50 and 100;
+
+Точне попадання - select поле from таблиця Where поле IN (7,8,9);
+Від протилежного -  select поле from таблиця Where NOT поле between 50 and 100;
+Поєднання логічних функцій - select поле from таблиця Where (поле>значення OR поле < значення) 
+AND (поле=значення);
+Сортування - select (поле) from (таблиця) ORDER BY (поле для сортування);
+- select (поле) from (таблиця) ORDER BY (поле для сортування) DESC;
+
+Агрегатні функції - SUM (поле) - сума;
+MIN/MAX  (поле) - максимальне/мінімальне число
+
+SELECT MIN(column_name) - БЕЗ ПРОБІЛУ!
+FROM table_name
+WHERE condition;
+
+SELECT MAX(column_name) - - БЕЗ ПРОБІЛУ!
+FROM table_name
+WHERE condition;
+
+
+COUNT (поле) - кількість записів (заповнених)
+AVG(поле) - середнє
+123
+adding changes
+Add Line
+
+Functions
+COUNT - порахувати
+select COUNT(super_id)
+    -> from employee;
+
+ select COUNT(emp_id)
+    -> from employee
+    -> where sex = 'F' AND birth_day > '1971-01-01';
+
+AVG - середнє значення
+ select AVG(salary)
+    -> from employee;
+
+    select AVG(salary)
+    -> from employee
+    -> where sex = 'M';
+
+SUM - сума
+
+
+Queries
+select * from назва таблиці order by назва по чому сортувати 
+
+DESC (від найбільшого)
+select * from назва таблиці order by назва по чому сортувати DESC
+
+limit  
+select* from назва таблиці limit (будь яке обмеження)
+
+ select first_name, last_name
+    -> from employee;
+
+
+as - виводить назву колонки так як потрібно мені
+     select first_name as forename, last_name as surname
+    -> from employee;
+
+distinct - всі що різняться
+     select distinct sex
+    -> from employee;
+
+
+NESTED Queries
+select employee.first_name, employee.last_name
+    -> from employee
+    -> where employee.emp_id IN (
+    -> select works_with.emp_id
+    -> from works_with
+    -> where works_with.total_sales > 30000);
+
+On Delete 
+On delete set NULL в коді таблиці прописуємо що буде, якщо видалити значення Foreign key.
+В рядку буде писати NULL після видалення.
+On delete CASCADE - використовуємо коли Foreign key також і Primary Key. Тоді потрібно видалити весь рядокю
+Create table branch (
+    branch_id INT primary key,
+    branch_name VARCHAR (40),
+    mgr_id INT,
+    mgr_start_date DATE,
+    Foreign key (mgr_id) REFERENCES employee(emp_id) ON DELETE SET NULL
+    );    
