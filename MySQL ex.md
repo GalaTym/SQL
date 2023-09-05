@@ -91,3 +91,23 @@ mysql> select * from employee order by first_name, last_name;
 |    105 | Stanley    | Hudson    | 1958-02-19 | M    |  69000 |      102 |         2 |
 +--------+------------+-----------+------------+------+--------+----------+-----------+
 9 rows in set (0.00 sec)
+
+
+Select all records from the Customers table, sort the result alphabetically, first by the column Country, then, by the column City.
+
+mysql> select* from employee
+    -> order by last_name, first_name;
++--------+------------+-----------+------------+------+--------+----------+-----------+
+| emp_id | first_name | last_name | birth_day  | sex  | salary | super_id | branch_id |
++--------+------------+-----------+------------+------+--------+----------+-----------+
+|    107 | Andy       | Bernard   | 1973-07-22 | M    |  65000 |      106 |         3 |
+|    108 | Jim        | Halpert   | 1978-10-01 | M    |  71000 |      106 |         3 |
+|    105 | Stanley    | Hudson    | 1958-02-19 | M    |  69000 |      102 |         2 |
+|    106 | Josh       | Porter    | 1969-09-05 | M    |  78000 |      100 |         3 |
+|    102 | Michael    | Scott     | 1964-03-15 | M    |  75000 |      100 |         2 |
+|    101 | Ola        | Smith     | 1961-05-11 | F    | 110000 |      100 |         1 |
+|    103 | Ola        | Smith     | 1971-06-25 | F    |  63000 |      102 |         2 |
+|    104 | Ola        | Smith     | 1980-02-05 | F    |  55000 |      102 |         2 |
+|    100 | David      | Wallace   | 1967-11-17 | M    | 250000 |     NULL |         1 |
++--------+------------+-----------+------------+------+--------+----------+-----------+
+9 rows in set (0.00 sec)
